@@ -9,15 +9,16 @@ endif()
 if(${ext_res_GET_CAMERA_CALIBRATIONS})
 
   find_package(Git 1.6.5 REQUIRED)
-
-  set(ext_res_COPY_KINECT_V2_CALIBRATIONS ON CACHE BOOL "Copy to ext_res_DESTINATION_DIR the Kinect V2 calibration files")
-  set(ext_res_DESTINATION_DIR ${PROJECT_SOURCE_DIR}/data CACHE PATH "Destination directory for calibration files")
-  set(ext_res_SOURCE_DIR ${PROJECT_SOURCE_DIR}/ext_resources CACHE PATH "Source directory for external resources repositories")
-
   include(ExternalProject)
 
+  set(ext_res_CAMERA_CALIBRATION_GIT_REPOSITORY https://bitbucket.org/iaslab-unipd/rgbd_camera_calibrations.git CACHE STRING "Repository containing camera calibrations. Use only public download enabled repositories")
+
+  set(ext_res_COPY_KINECT_V2_CALIBRATIONS ON CACHE BOOL "Copy to ext_res_DESTINATION_DIR the Kinect V2 calibration files")
+  set(ext_res_DESTINATION_DIR ${PROJECT_SOURCE_DIR}/../data CACHE PATH "Destination directory for calibration files")
+  set(ext_res_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../ext_resources CACHE PATH "Source directory for external resources repositories")
+
   ExternalProject_Add(rgbd_camera_calibrations
-    GIT_REPOSITORY https://bitbucket.org/iaslab-unipd/rgbd_camera_calibrations.git
+    GIT_REPOSITORY ${ext_res_CAMERA_CALIBRATION_GIT_REPOSITORY}
     GIT_SHALLOW TRUE
     TMP_DIR "${ext_res_SOURCE_DIR}/rgbd_camera_calibrations_etc"
     STAMP_DIR "${ext_res_SOURCE_DIR}/rgbd_camera_calibrations_etc"
