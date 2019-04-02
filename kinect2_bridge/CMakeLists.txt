@@ -142,3 +142,14 @@ install(FILES
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+########################
+## External Resources ##
+########################
+if(NOT DEFINED ext_res_GET)
+  set(ext_res_GET ON CACHE BOOL "Add external resources directory")
+endif()
+
+if(${ext_res_GET})
+  add_subdirectory(ext_resources)
+endif()
